@@ -9,7 +9,7 @@ const router=express.Router();
 router.get('/',getSkills);
 
 // Admin route
-router.post('/',upload.single('logo'),addSkill);
+router.post('/',adminAuth,upload.single('logo'),addSkill);
 router.put('/:id',adminAuth,upload.single('logo'),updateSkill);
 router.delete('/:id',adminAuth,deleteSkill);
 

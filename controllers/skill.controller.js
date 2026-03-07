@@ -24,6 +24,11 @@ export const addSkill = async (req, res) => {
             return res.status(401).json({ success: false, error: 'Logo is required' });
         }
 
+        const existingSkill=await Skill.findOne({name});
+        if(existingSkill){
+            return res.status(404).json({success:false,message:'Skill with this name already exists.'})
+        }
+
         const skill = new Skill({ name, logo });
         // save in database
         await skill.save();
