@@ -13,7 +13,7 @@ const sendEmail = async ({ name, email, subject, message }) => {
           
           <tr>
             <td style="background:#4f46e5;color:white;padding:20px;text-align:center">
-              <h2 style="margin:0;">📩 New Portfolio Message</h2>
+              <h2 style="margin:0;">&lt;Asish/kumar&gt;</h2>
             </td>
           </tr>
 
