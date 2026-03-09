@@ -6,7 +6,7 @@ import connectDB from './config/db.js';
 import contactRoute from './routes/contact.route.js'
 import skillsRoute from './routes/skill.route.js'
 import adminRoute from './routes/admin.route.js';
-
+import educationRoute from './routes/education.route.js';
 
 const app = express();
 
@@ -23,7 +23,8 @@ app.use(express.json());
 // route define
 app.use('/api', contactRoute);
 app.use('/api/skills', skillsRoute);
-app.use('/api/admin',adminRoute);
+app.use('/api/admin', adminRoute);
+app.use('/api/education', educationRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT : ${PORT}`);
