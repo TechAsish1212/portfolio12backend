@@ -58,7 +58,7 @@ export const updateQuote = async (req, res) => {
     }
 }
 
-// delete 
+// delete Quote
 export const deleteQuote=async(req,res)=>{
     try {
         const {id}=req.params;
