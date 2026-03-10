@@ -9,6 +9,7 @@ import adminRoute from './routes/admin.route.js';
 import educationRoute from './routes/education.route.js';
 import quoteRoute from './routes/quote.route.js'
 import projectRoute from './routes/project.route.js';
+import profileRoute from './routes/profile.route.js'
 
 const app = express();
 
@@ -27,8 +28,9 @@ app.use('/api', contactRoute);
 app.use('/api/skills', skillsRoute);
 app.use('/api/admin', adminRoute);
 app.use('/api/education', educationRoute);
-app.use('/api/quote',quoteRoute);
-app.use('/api/project',projectRoute);
+app.use('/api/quote', quoteRoute);
+app.use('/api/project', projectRoute);
+app.use('/api/profile', profileRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT : ${PORT}`);
