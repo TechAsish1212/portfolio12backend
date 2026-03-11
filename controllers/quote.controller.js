@@ -4,7 +4,8 @@ import { Quote } from "../models/Quote.model.js"
 export const getQuote = async (req, res) => {
     try {
         const quote = await Quote.find();
-        return res.status(200).json({ success: true, data: quote, message: "All Quote Details is fetch" });
+        const count=await Quote.countDocuments()
+        return res.status(200).json({ success: true, data: quote, count:count, message: "All Quote Details is fetch" });
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
     }
