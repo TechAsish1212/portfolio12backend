@@ -57,6 +57,12 @@ const profileSchema = new mongoose.Schema({
   talkImg_public_id: {
     type: String
   },
+   profileImg: {
+    type: String
+  },
+  profileImg_public_id: {
+    type: String
+  },
   name: {
     type: String,
   },
