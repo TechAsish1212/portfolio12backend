@@ -21,7 +21,9 @@ const PORT = process.env.PORT;
 connectDB()
 
 // middleware
-app.use(cors());
+app.use(cors({
+    origin:"*"
+}));
 app.use(express.json());
 
 // route define
