@@ -26,6 +26,11 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// testing 
+app.get('/',(req,res)=>{
+    return res.send("Api is running......");
+})
+
 // route define
 app.use('/api', contactRoute);
 app.use('/api/skills', skillsRoute);
