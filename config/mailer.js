@@ -14,15 +14,13 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587, // 🔥 use 587 instead of 465
-  secure: false, // true only for 465
+  port: 587,          // ✅ IMPORTANT
+  secure: false,      // ✅ IMPORTANT (must be false for 587)
   auth: {
     user: "portfolio.p2019@gmail.com",
-    pass: "hwva wmcg aohu wwod"
+    pass: "hwva wmcg aohu wwod",
   },
-  tls: {
-    rejectUnauthorized: false
-  }
+  family: 4,          // ✅ FORCE IPv4 (fixes ENETUNREACH)
 });
 
 export default transporter;
