@@ -1,36 +1,36 @@
-import jwt from "jsonwebtoken";
+  import jwt from "jsonwebtoken";
 
-const adminAuth = (req, res, next) => {
+  const adminAuth = (req, res, next) => {
 
-  const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
-    return res.status(401).json({
-      message: "Token required"
-    });
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  try {
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (decoded.role !== "admin") {
-      return res.status(403).json({
-        message: "Access denied"
+    if (!authHeader) {
+      return res.status(401).json({
+        message: "Token required"
       });
     }
 
-    next();
+    const token = authHeader.split(" ")[1];
 
-  } catch (error) {
+    try {
 
-    res.status(401).json({
-      message: "Invalid token"
-    });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  }
-};
+      if (decoded.role !== "admin") {
+        return res.status(403).json({
+          message: "Access denied"
+        });
+      }
 
-export default adminAuth;
+      next();
+
+    } catch (error) {
+
+      res.status(401).json({
+        message: "Invalid token"
+      });
+
+    }
+  };
+
+  export default adminAuth;
