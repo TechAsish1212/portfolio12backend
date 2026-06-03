@@ -87,7 +87,7 @@ const sendEmail = async ({ name, email, subject, message }) => {
 
   const { data, error } = await resend.emails.send({
     from: "Portfolio Contact <onboarding@resend.dev>",
-    to: ["portfolio.p2019@gmail.com"],
+    to: ["berarebati7679@gmail.com"],
     subject: `New Portfolio Message: ${subject}`,
     html: `
       <div style="font-family: Arial, sans-serif; background:#f4f6f9; padding:40px;">
