@@ -11,6 +11,7 @@ import quoteRoute from './routes/quote.route.js'
 import projectRoute from './routes/project.route.js';
 import profileRoute from './routes/profile.route.js';
 import personalRoute from './routes/personal.route.js';
+import chatRoute from './routes/chat.route.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/api/quote', quoteRoute);
 app.use('/api/project', projectRoute);
 app.use('/api/profile', profileRoute);
 app.use('/api/personal', personalRoute)
+app.use('/api', chatRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT : ${PORT}`);
