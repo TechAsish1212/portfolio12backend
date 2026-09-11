@@ -45,7 +45,7 @@ export async function chatHandler(req, res) {
 
   try {
     const stream = await ai.models.generateContentStream({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3.6-flash',
       contents: `${SYSTEM_PROMPT}\n\n--- Conversation ---\n${conversation}\nAssistant:`,
     });
 
