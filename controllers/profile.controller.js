@@ -1,7 +1,6 @@
 import { Profile } from "../models/Profile.model.js";
 import cloudinary from "../utils/cloudinary.js";
 
-// GET PROFILE
 export const getProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne();
@@ -18,7 +17,6 @@ export const getProfile = async (req, res) => {
   }
 };
 
-// ADD PROFILE
 export const addProfile = async (req, res) => {
   try {
     const { name, title, github, linkedin } = req.body;
