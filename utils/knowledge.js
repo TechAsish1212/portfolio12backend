@@ -265,7 +265,7 @@ CONTACT & SOCIAL LINKS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Email:
-your-email@example.com
+asishkrbera3804@gmail.com
 
 LinkedIn:
 https://www.linkedin.com/in/asish12/
