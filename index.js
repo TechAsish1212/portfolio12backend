@@ -12,6 +12,7 @@ import projectRoute from './routes/project.route.js';
 import profileRoute from './routes/profile.route.js';
 import personalRoute from './routes/personal.route.js';
 import chatRoute from './routes/chat.route.js';
+import expRoutes from './routes/experience.route.js';
 
 const app = express();
 
@@ -43,7 +44,8 @@ app.use('/api/education', educationRoute);
 app.use('/api/quote', quoteRoute);
 app.use('/api/project', projectRoute);
 app.use('/api/profile', profileRoute);
-app.use('/api/personal', personalRoute)
+app.use('/api/personal', personalRoute);
+app.use('/api/experience',expRoutes);
 app.use('/api', chatRoute);
 
 app.listen(PORT, () => {
