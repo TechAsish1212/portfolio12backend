@@ -40,18 +40,43 @@ export const createExperience = async (req, res) => {
 
 
 export const getAllExperiences = async (req, res) => {
-  try {
-    const experiences = await Experience.find().sort({ startDate: -1 });
+    try {
+        const experiences = await Experience.find().sort({ startDate: -1 });
 
-    res.status(200).json({
-      success: true,
-      count: experiences.length,
-      data: experiences,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
+        res.status(200).json({
+            success: true,
+            count: experiences.length,
+            data: experiences,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
 };
+
+export const updateExperience = async (req, res) => {
+    try {
+        const exp = await Experience.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+
+        if(!exp){
+            return res.status(404).json({
+                success:false,
+                message:"Experience not found"
+            })
+        }
+        
+        res.status(200).json({
+            success:true,
+            message:"Experience update successfully",
+            data:exp,
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
