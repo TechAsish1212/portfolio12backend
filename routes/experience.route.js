@@ -10,6 +10,6 @@ expRoutes.get('/', getAllExperiences);
 
 expRoutes.post('/', adminAuth, upload.single("companyLogo"), createExperience);
 expRoutes.put('/:id', adminAuth, upload.single("companyLogo"), updateExperience);
-expRoutes.delete('/id', adminAuth, deleteExperience);
+expRoutes.delete('/:id', adminAuth, deleteExperience);
 
 export default expRoutes;
