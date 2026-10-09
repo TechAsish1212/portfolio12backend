@@ -13,15 +13,15 @@ export const createExperience = async (req, res) => {
 
         const experience = await Experience.create({
             companyName,
-            companyLogo,
+            companyLogo:req.file?.path||"",
             position,
             employmentType,
             location,
             startDate,
-            endDate: currentlyWorking ? undefined : endDate,
-            currentlyWorking,
+            endDate: currentlyWorking==='true' ? undefined : endDate,
+            currentlyWorking:currentlyWorking==="true",
             description,
-            technologies
+            technologies:technologies?JSON.parse(technologies):[],
         });
 
         return res.status(201).json({
