@@ -65,6 +65,12 @@ const experienceSchema = new mongoose.Schema(
   }
 );
 
+experienceSchema.pre("validate", function () {
+  if (this.currentlyWorking) {
+    this.endDate = undefined;
+  }
+});
+
 const Experience = mongoose.model("Experience", experienceSchema);
 
 export default Experience;
