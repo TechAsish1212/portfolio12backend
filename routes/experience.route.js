@@ -1,5 +1,5 @@
 import express from 'express';
-import { createExperience, getAllExperiences, updateExperience } from '../controllers/experience.controller.js';
+import { createExperience, deleteExperience, getAllExperiences, updateExperience } from '../controllers/experience.controller.js';
 import adminAuth from '../middlewares/adminAuth.js';
 
 
@@ -9,5 +9,6 @@ expRoutes.get('/',getAllExperiences);
 
 expRoutes.post('/',adminAuth,createExperience);
 expRoutes.put('/:id',adminAuth,updateExperience);
+expRoutes.delete(';/id',adminAuth,deleteExperience);
 
 export default expRoutes;
