@@ -2,45 +2,71 @@ import Experience from "../models/experience.model.js";
 
 export const createExperience = async (req, res) => {
     try {
-        const { companyName, companyLink, position, employmentType, location, startDate, endDate, currentlyWorking, description, technologies } = req.body;
-
-        if (!companyName || !position || !startDate || !description || !companyLink) {
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-            })
-        }
-
-        const experience = await Experience.create({
+        const {
             companyName,
-            companyLogo: req.file?.path || "",
             companyLink,
-            Image: req.file?.path || "",
             position,
             employmentType,
             location,
             startDate,
-            endDate: currentlyWorking === 'true' ? undefined : endDate,
+            endDate,
+            currentlyWorking,
+            description,
+            technologies,
+        } = req.body;
+
+        if (
+            !companyName ||
+            !position ||
+            !startDate ||
+            !description ||
+            !companyLink
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
+            });
+        }
+
+        // Get files uploaded through upload.fields()
+        const companyLogo =
+            req.files?.companyLogo?.[0]?.path || "";
+
+        const Image =
+            req.files?.Image?.[0]?.path || "";
+
+        const experience = await Experience.create({
+            companyName,
+            companyLogo,
+            companyLink,
+            Image,
+            position,
+            employmentType,
+            location,
+            startDate,
+            endDate:
+                currentlyWorking === "true"
+                    ? undefined
+                    : endDate || undefined,
             currentlyWorking: currentlyWorking === "true",
             description,
-            technologies: technologies ? JSON.parse(technologies) : [],
-
+            technologies: technologies
+                ? JSON.parse(technologies)
+                : [],
         });
 
         return res.status(201).json({
             success: true,
             message: "Experience created successfully",
-            data: experience
-        })
-
+            data: experience,
+        });
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: error.message,
         });
     }
-}
-
+};
 
 export const getAllExperiences = async (req, res) => {
     try {
@@ -110,19 +136,29 @@ export const updateExperience = async (req, res) => {
             });
         }
 
+        const companyLogo =
+            req.files?.companyLogo?.[0]?.path ||
+            existingExperience.companyLogo ||
+            "";
+
+        const Image =
+            req.files?.Image?.[0]?.path ||
+            existingExperience.Image ||
+            "";
+
         // Validate required fields
-        if (
-            !companyName ||
-            !position ||
-            !startDate ||
-            !description ||
-            !companyLink
-        ) {
-            return res.status(400).json({
-                success: false,
-                message: "Company name, position, start date, and description,Company Link are required",
-            });
-        }
+        // if (
+        //     !companyName ||
+        //     !position ||
+        //     !startDate ||
+        //     !description ||
+        //     !companyLink
+        // ) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Company name, position, start date, and description,Company Link are required",
+        //     });
+        // }
 
         // Convert currentlyWorking to Boolean
         const isCurrentlyWorking =
@@ -143,24 +179,24 @@ export const updateExperience = async (req, res) => {
         const updatedExperience = await Experience.findByIdAndUpdate(
             req.params.id,
             {
-                companyName,
-                companyLogo:
-                    req.file?.path ||
-                    existingExperience.companyLogo ||
-                    "",
-                Image:
-                    req.file?.path ||
-                    existingExperience.Image ||
-                    "",
-                position,
-                employmentType,
-                location,
-                startDate,
-                endDate: isCurrentlyWorking ? undefined : endDate,
+                companyName:
+                    companyName ?? existingExperience.companyName,
+                companyLogo,
+                Image,
+                companyLink:
+                    companyLink ?? existingExperience.companyLink,
+                position: position ?? existingExperience.position,
+                employmentType:
+                    employmentType ?? existingExperience.employmentType,
+                location: location ?? existingExperience.location,
+                startDate: startDate ?? existingExperience.startDate,
+                endDate: isCurrentlyWorking
+                    ? undefined
+                    : endDate ?? existingExperience.endDate,
                 currentlyWorking: isCurrentlyWorking,
-                description,
+                description:
+                    description ?? existingExperience.description,
                 technologies: parsedTechnologies,
-                companyLink
             },
             {
                 new: true,
