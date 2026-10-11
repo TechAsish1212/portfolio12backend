@@ -12,6 +12,15 @@ const experienceSchema = new mongoose.Schema(
       type: String,
     },
 
+    companyLink:{
+      type:String,
+      required:true,
+    },
+
+    Image:{
+      type:String
+    },
+
     position: {
       type: String,
       required: true,

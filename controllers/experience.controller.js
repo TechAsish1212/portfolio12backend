@@ -2,9 +2,9 @@ import Experience from "../models/experience.model.js";
 
 export const createExperience = async (req, res) => {
     try {
-        const { companyName, companyLogo, position, employmentType, location, startDate, endDate, currentlyWorking, description, technologies } = req.body;
+        const { companyName, companyLink, position, employmentType, location, startDate, endDate, currentlyWorking, description, technologies } = req.body;
 
-        if (!companyName || !position || !startDate || !description) {
+        if (!companyName || !position || !startDate || !description || !companyLink) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -13,15 +13,18 @@ export const createExperience = async (req, res) => {
 
         const experience = await Experience.create({
             companyName,
-            companyLogo:req.file?.path||"",
+            companyLogo: req.file?.path || "",
+            companyLink,
+            Image: req.file?.path || "",
             position,
             employmentType,
             location,
             startDate,
-            endDate: currentlyWorking==='true' ? undefined : endDate,
-            currentlyWorking:currentlyWorking==="true",
+            endDate: currentlyWorking === 'true' ? undefined : endDate,
+            currentlyWorking: currentlyWorking === "true",
             description,
-            technologies:technologies?JSON.parse(technologies):[],
+            technologies: technologies ? JSON.parse(technologies) : [],
+
         });
 
         return res.status(201).json({
@@ -94,6 +97,7 @@ export const updateExperience = async (req, res) => {
             currentlyWorking,
             description,
             technologies,
+            companyLink
         } = req.body;
 
         // Check if experience exists
@@ -111,11 +115,12 @@ export const updateExperience = async (req, res) => {
             !companyName ||
             !position ||
             !startDate ||
-            !description
+            !description ||
+            !companyLink
         ) {
             return res.status(400).json({
                 success: false,
-                message: "Company name, position, start date, and description are required",
+                message: "Company name, position, start date, and description,Company Link are required",
             });
         }
 
@@ -143,6 +148,10 @@ export const updateExperience = async (req, res) => {
                     req.file?.path ||
                     existingExperience.companyLogo ||
                     "",
+                Image:
+                    req.file?.path ||
+                    existingExperience.Image ||
+                    "",
                 position,
                 employmentType,
                 location,
@@ -151,6 +160,7 @@ export const updateExperience = async (req, res) => {
                 currentlyWorking: isCurrentlyWorking,
                 description,
                 technologies: parsedTechnologies,
+                companyLink
             },
             {
                 new: true,
